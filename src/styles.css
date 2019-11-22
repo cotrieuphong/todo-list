@@ -46,6 +46,11 @@ button {
   align-items: center;
   position: relative;
   margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.todo__head:hover {
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.6);
 }
 
 .todo__add {
@@ -126,7 +131,7 @@ button {
 .todo__item {
   list-style-type: none;
   color: white;
-  padding: 5px;
+  padding: 5px 15px;
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
   margin-bottom: 10px;
@@ -134,18 +139,37 @@ button {
   opacity: 0;
   display: flex;
   animation: slide-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.375) forwards;
+  letter-spacing: 2px;
 }
 
-.todo__delete {
+.todo__item:hover {
+  transition: all 0.3s ease;
+  box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.4);
+}
+
+.todo__change {
+  flex: 1;
+  height: 24px;
+  margin: 0 15px 0 -15px;
+  color: #fff;
+  padding: 0 15px;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+.todo__delete,
+.todo__save {
   margin-left: auto;
   color: #fff;
   cursor: pointer;
+  letter-spacing: 2px;
 }
 
 .todo__item-toggle {
   margin-left: 5px;
   color: #fff;
   cursor: pointer;
+  letter-spacing: 2px;
 }
 
 .todo__item:nth-child(2) {

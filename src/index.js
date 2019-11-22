@@ -102,14 +102,32 @@ var todoList = {
     this.displayTodo();
   },
   showEditTodoInput: function(position) {
+    // Target item
+    var target = document.getElementById(position);
     // Clear todo item
-    document.getElementById(position).innerHTML = "";
+    target.innerHTML = "";
     // Show change input
-    var todoItem = document.getElementById(position);
-    todoItem.appendChild(this.createChangeInput());
-    todoItem.appendChild(this.createSaveButton());
-    var input = document.querySelector(".todo__item");
-    input.firstChild().value = this.todos[position].text;
+    target.appendChild(this.createChangeInput());
+    target.appendChild(this.createSaveButton());
+    // Input
+    var input = target.children[0];
+    var button = target.children[1];
+    input.focus();
+    input.value = this.todos[position].text;
+
+    button.addEventListener("click", function() {
+      todoList.editTodo(position, input.value);
+    });
+
+    input.addEventListener("keyup", function(event) {
+      if (event.which === 13) {
+        todoList.editTodo(position, input.value);
+      }
+    });
+
+    input.addEventListener("focusout", function() {
+      todoList.editTodo(position, input.value);
+    });
 
     document
       .querySelector(".todo__change")
@@ -199,11 +217,6 @@ document
     // Show edit input
     else if (target.classList[0] === "todo__item") {
       todoList.showEditTodoInput(target.id);
-    }
-    // Save edit
-    else if (target.className === "todo__save") {
-      var input = document.querySelector(target.parentNode.id, ".todo__change");
-      todoList.editTodo(target.parentNode.id, input.value);
     }
     // Toggle todo by id
     else if (target.className === "todo__item-toggle") {
